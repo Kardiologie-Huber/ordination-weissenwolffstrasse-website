@@ -1,0 +1,27 @@
+{
+  "name": "ordination-weissenwolffstrasse-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro build",
+    "preview": "astro preview",
+    "postbuild": "node ./postbuild.mjs -path https://ordination-weissenwolffstrasse.at/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@astrojs/mdx": "^4.0.3",
+    "@astrojs/ts-plugin": "^1.10.4",
+    "astro": "^5.1.1",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "sass": "^1.83.0",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3"
+  }
+}

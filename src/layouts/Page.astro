@@ -1,0 +1,106 @@
+---
+import Head from '../components/page/Head.astro';
+import Navbar from '../components/page/Navbar.astro';
+import Footer from '../components/page/Footer.astro';
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js?url';
+import '../styles/styles.scss';
+import { EMAIL } from '../constants';
+
+const { title, description, heroimage, herotitle, herodescription } =
+  Astro.props;
+
+---
+
+<html lang="de">
+  <head>
+    <Head
+      title={title ? title + ' | Ordination Weissenwolffstrasse' : 'Ordination Weissenwolffstrasse'}
+      description={description}
+    />
+  </head>
+
+  <body>
+    <header>
+      <Navbar />
+    </header>
+
+    <main>
+      {
+        heroimage && (
+          <div
+            class={herotitle ? 'hero-image hero-image-large' : 'hero-image'}
+            style={'background-image: url("/images/' + heroimage + '")'}
+          >
+            {herotitle && (
+              <div class="container">
+                <div class="row">
+                  <div class="col-12 col-lg-8 col-xl-6">
+                    <div class="hero-title">
+                      <h1>{herotitle}</h1>
+                    </div>
+
+                    {herodescription && (
+                      <div class="hero-description">
+                        <p>{herodescription}</p>
+                      </div>
+
+                      <p class="text-center actions">
+                        <a class="btn btn-secondary d-none d-md-inline-block"
+                            aria-current="page"
+                            role="button"
+                            href={'mailto:' + EMAIL}
+                            target="_blank"
+                            >Kontakt</a>
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )
+      }
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <Footer />
+    </footer>
+
+    <!-- comming soon overlay -->
+    <div class="comming-soon-overlay">
+      <div class="comming-soon-overlay-content">
+        <h1>Herzlich Willkommen in Ihrer kardiologischen Praxis</h1>
+        <p>Ab Sommer 2025 sind wir für Sie da!</p>
+
+        <p>Unsere neue Praxis bietet Ihnen modernste Diagnostik und individuelle Betreuung in allen Bereichen der Herzgesundheit. Unser Ziel ist es, Ihre Gesundheit nachhaltig zu fördern und Sie auf Ihrem Weg zu einem starken und gesunden Herzen bestmöglich zu unterstützen.</p>
+
+        <p>Bleiben Sie gespannt - bald finden Sie hier alle Informationen zu unseren Leistungen, dem Team und der Terminvereinbarung. Moment ist die Webseite noch in Arbeit. Schauen Sie gerne in Kürze wieder vorbei, um die neuesten Updates zu entdecken!</p>
+
+        <p>Wir freuen uns darauf, Sie schon bald persönlich in unserer Praxis willkommen zu heißen!</p>
+
+        <p><strong>Ihr Dr. med. Peter Huber</strong></p>
+      </div>
+    </div>
+
+    <!-- 100% privacy-first analytics -->
+    <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  </body>
+  <script src={bootstrap}></script>
+  <script
+    src="https://kit.fontawesome.com/9fc80d8fb2.js"
+    crossorigin="anonymous"></script>
+  <script>
+    // if query param "preview" is true, do not show the comming soon overlay
+    if (localStorage.getItem('preview') === 'true' || window.location.search.includes('preview=true')) {
+      localStorage.setItem('preview', 'true');
+      document.querySelector('.comming-soon-overlay').style.display = 'none';
+    }
+  </script>
+</html>
