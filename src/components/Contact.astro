@@ -1,0 +1,34 @@
+---
+const { title, description } = Astro.props;
+import LinkButton from '@components/LinkButton.astro';
+import { PHONE, EMAIL } from '../constants';
+---
+
+<section class="highlight schedule-appointment">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 offset-0 col-md-6 offset-md-3">
+        <h2 class="text-center">{title ? title : 'Jetzt anfragen'}</h2>
+
+        <p>
+          {description && <div>{description}</div>}
+          {
+            !description && (
+              <div>
+                Interessiert? Kontaktieren Sie uns für weitere Informationen
+                oder eine Besichtigung: <a href={'mailto:' + EMAIL}>{EMAIL}</a>{' '}
+                oder {PHONE}
+              </div>
+            )
+          }
+        </p>
+      </div>
+
+      <!--<div
+        class="d-none d-md-flex col-12 col-md-6 justify-content-center align-items-center"
+      >
+        <i class="icon fa-sharp-duotone fa-solid fa-calendar-heart"></i>
+      </div> -->
+    </div>
+  </div>
+</section>

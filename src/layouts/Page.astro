@@ -29,12 +29,12 @@ const { title, description, heroimage, herotitle, herodescription } =
         heroimage && (
           <div
             class={herotitle ? 'hero-image hero-image-large' : 'hero-image'}
-            style={'background-image: url("/images/' + heroimage + '")'}
+            style={'background-image: url("/images/' + heroimage + '");background-position: center center;'}
           >
             {herotitle && (
               <div class="container">
                 <div class="row">
-                  <div class="col-12 col-lg-8 col-xl-6">
+                  <div class="offset-0 col-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
                     <div class="hero-title">
                       <h1>{herotitle}</h1>
                     </div>
@@ -45,7 +45,7 @@ const { title, description, heroimage, herotitle, herodescription } =
                       </div>
 
                       <p class="text-center actions">
-                        <a class="btn btn-secondary d-none d-md-inline-block"
+                        <a class="btn btn-secondary"
                             aria-current="page"
                             role="button"
                             href={'mailto:' + EMAIL}
@@ -93,6 +93,9 @@ const { title, description, heroimage, herotitle, herodescription } =
 
       </div>
     </div>
+
+    <!-- fslightbox -->
+    <script src="/js/fslightbox.js" is:inline="true"></script>
 
     <!-- 100% privacy-first analytics -->
     <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
