@@ -1,5 +1,5 @@
 ---
-const { text, href, target, color } = Astro.props;
+const { text, href, target, color, style } = Astro.props;
 ---
 
 <p class="text-center">
@@ -8,6 +8,7 @@ const { text, href, target, color } = Astro.props;
     aria-current="page"
     role="button"
     href={href}
+    style={style}
     target={target ?? '_self'}>{text}</a
   >
 </p>
