@@ -7,7 +7,7 @@ import { PHONE, EMAIL } from '../constants';
 <section class="highlight schedule-appointment">
   <div class="container">
     <div class="row">
-      <div class="col-12 offset-0 col-md-6 offset-md-3">
+      <div class="col-12 offset-0 col-md-8 offset-md-2">
         <h2 class="text-center">{title ? title : 'Jetzt anfragen'}</h2>
 
         <p>
@@ -15,17 +15,16 @@ import { PHONE, EMAIL } from '../constants';
           {
             !description && (
               <p>
-                Interessiert? Kontaktieren Sie uns für weitere Informationen
-                oder eine Besichtigung: <a href={'mailto:' + EMAIL}>{EMAIL}</a>{' '}
-                oder {PHONE}
+                Sind Sie interessiert? Wir stehen Ihnen gerne für weitere Informationen oder einen Besichtigungstermin zur Verfügung. Kontaktieren Sie uns einfach per E-Mail unter <a href={'mailto:' + EMAIL}>{EMAIL}</a>{' '}
+                oder telefonisch unter {PHONE}.
               </p>
 
               <p class="text-center actions">
                 <a class="btn btn-secondary"
                     aria-current="page"
                     role="button"
-                    href="{'mailto:' + EMAIL}"
-                    
+                    href={'mailto:' + EMAIL}
+                    target="_blank"
                     >Kontakt per Email</a>
               </p>
             )
