@@ -14,11 +14,20 @@ import { PHONE, EMAIL } from '../constants';
           {description && <div>{description}</div>}
           {
             !description && (
-              <div>
+              <p>
                 Interessiert? Kontaktieren Sie uns für weitere Informationen
                 oder eine Besichtigung: <a href={'mailto:' + EMAIL}>{EMAIL}</a>{' '}
                 oder {PHONE}
-              </div>
+              </p>
+
+              <p class="text-center actions">
+                <a class="btn btn-secondary"
+                    aria-current="page"
+                    role="button"
+                    href="{'mailto:' + EMAIL}"
+                    
+                    >Kontakt per Email</a>
+              </p>
             )
           }
         </p>
