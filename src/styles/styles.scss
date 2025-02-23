@@ -63,6 +63,10 @@ header {
     margin-bottom: -10px;
   }
 
+  .navbar {
+    height: 60px;
+  }
+
   .navbar-brand {
     display: flex;
     gap: 8px;
@@ -79,15 +83,20 @@ header {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 430px) {
   header {
-    .logo {
-      width: 30px;
+    .navbar-brand {
+      font-size: 16px;
+
+      .heart {
+        font-size: 18px;
+        margin-top: -1px;
+      }
     }
 
-    .navbaricon {
-      font-size: 16px;
-      color: $primary;
+    .navbar-toggler-icon {
+      margin-top: -1px;
+      font-size: 14px;
     }
   }
 }
