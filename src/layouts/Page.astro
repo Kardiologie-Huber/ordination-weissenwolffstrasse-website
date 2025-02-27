@@ -73,27 +73,6 @@ const { title, description, heroimage, herotitle, herodescription } =
       <Footer />
     </footer>
 
-    <!-- comming soon overlay -->
-    <div class="comming-soon-overlay">
-      <div class="comming-soon-overlay-content">
-        <h1>Bald verfügbar: Neue Ordinationsflächen in Linz</h1>
-        <p>Moderne und zentral gelegene Praxisräume – perfekt für Ärzte, Therapeuten und andere Gesundheitsdienstleister.  </p>
-
-        <p><strong>
-          Weißenwolffstraße 1, 1. Stock  <br />
-          4020 Linz  <br />
-          Oberösterreich
-        </strong>
-        </p>
-
-        <p>Weitere Informationen finden Sie in Kürze hier auf dieser Webseite.</p>
-
-        <p>Für Fragen oder Vormerkungen schreiben Sie gerne an:  
-          <a href={'mailto:' + EMAIL}>{EMAIL}</a></p>
-
-      </div>
-    </div>
-
     <!-- fslightbox -->
     <script src="/js/fslightbox.js" is:inline="true"></script>
 
@@ -101,14 +80,5 @@ const { title, description, heroimage, herotitle, herodescription } =
     <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   </body>
   <script src={bootstrap}></script>
-  <script
-    src="https://kit.fontawesome.com/9fc80d8fb2.js"
-    crossorigin="anonymous"></script>
-  <script>
-    // if query param "preview" is true, do not show the comming soon overlay
-    if (localStorage.getItem('preview') === 'true' || window.location.search.includes('preview=true')) {
-      localStorage.setItem('preview', 'true');
-      document.querySelector('.comming-soon-overlay').style.display = 'none';
-    }
-  </script>
+
 </html>
