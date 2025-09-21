@@ -235,12 +235,37 @@ nav li:before {
   background-size: cover;
   background-position: center;
   height: 200px;
-  margin-top: -$padding * 2;
-  margin-bottom: $padding * 2;
+  margin-top: -$padding * 2 - 1;
+  position: relative;
+  text-align: center;
 
-  > .container {
+  .hero-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    align-content: center;
+    background-color: #000000;
+    z-index: 1;
+  }
+
+  > .container-fluid {
+    position: relative;
+    height: 100%;
+    align-content: end;
+    z-index: 2;
+    text-shadow: 2px 2px 18px black;
+
+    > .row {
+      //background-color: rgba(#000000, 0.33);
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      padding-top: $padding * 0.5;
+      padding-bottom: $padding * 0.5;
+    }
   }
 
   .actions {
@@ -327,27 +352,16 @@ main
   }
 }
 
-.comming-soon-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(#000, 0.5);
-  z-index: 2000;
-  backdrop-filter: blur(6px);
+// image grid
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 
-  h1 {
-    font-size: 1.8rem;
+  a {
   }
 
-  .comming-soon-overlay-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: $padding * 2;
-    border-radius: $border-radius;
+  img {
+    height: 250px;
   }
 }

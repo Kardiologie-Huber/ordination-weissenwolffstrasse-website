@@ -16,6 +16,12 @@
         "heroimage": {
           "type": "string"
         },
+        "heroimagedarkness": {
+          "type": "number"
+        },
+        "heroimageposition": {
+          "type": "string"
+        },
         "herotitle": {
           "type": "string"
         },

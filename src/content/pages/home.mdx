@@ -2,7 +2,8 @@
 title: Ordinationsflächen Linz
 description: Sie suchen als Arzt, Therapeut oder Gesundheitsdienstleister eine moderne, flexible Ordinationsfläche? Wir bieten optimal ausgestattete Räume in Linz!
 slug: '/'
-heroimage: weissenwolffstrasse-1-blau.png
+heroimage: 'src/assets/images/empfang-4.jpg'
+heroimageposition: 50% 20%
 herotitle: Ihre neue Ordinationsfläche in Linz
 herodescription: Moderne, flexible und zentral gelegene Praxisräume – ideal für Ärzte, Therapeuten und Gesundheitsdienstleister.
 ---
@@ -11,15 +12,11 @@ import { EMAIL, PHONE, WEB } from '../../constants';
 import Contact from '@components/Contact.astro';
 import LinkButton from '@components/LinkButton.astro';
 
-# Moderne Ordinationsräume zur Miete
+## Moderne Ordinationsräume zur Miete
 
 Sichern Sie sich Ihre neue Praxisfläche in zentraler Lage von Linz! In der Weißenwolffstraße 1 (1. Stock), 4020 Linz bieten wir drei komplett renovierte und hochwertig ausgestattete Ordinationsräume zur Miete an – ideal für Ärzte, Therapeuten und andere Gesundheitsdienstleister.
 
 Die Räumlichkeiten sind flexibel mietbar: von einer halbtägigen Nutzung an bestimmten Wochentagen bis hin zur dauerhaften Anmietung.
-
-<a data-fslightbox href="/images/grundriss.png">
-  <img src="/images/grundriss.png" alt="Grundriss der Ordination" />
-</a>
 
 ### Voll ausgestattet Ordinationsräume
 
@@ -32,8 +29,6 @@ Die Räumlichkeiten sind flexibel mietbar: von einer halbtägigen Nutzung an bes
 - Waage
 - Zugang zum GINS (Gesundheitsinformationsnetzservice, Ecard)
 - Klimaanlage
-
-**Hinweis**: eCard-Reader und die Anmeldung bei der Krankenkasse müssen selbst übernommen werden.
 
 ### Zusätzliche Untersuchungsmöglichkeiten
 
@@ -49,7 +44,9 @@ Folgende Untersuchungsmöglichkeiten stehen optional zur Verfügung:
 
 **Die Abrechnung für die Nutzung dieser Untersuchungsmöglichkeiten erfolgt nach Vereinbarung.**
 
-<Contact></Contact>
+<a data-fslightbox href="/images/grundriss.png">
+  <img src="/images/grundriss.png" alt="Grundriss der Ordination" />
+</a>
 
 ### Gemeinschaftsbereiche – Mehr Komfort für Mieter
 
@@ -64,12 +61,12 @@ Zusätzlich profitieren Sie von:
 - **Top-Online-Präsenz:** Ihre Praxis wird auf <a href={`${WEB}`}>{WEB}</a> gelistet
 - **Zentrale Lage:** Beste Erreichbarkeit im Herzen von Linz – Parkplätze für Patienten & Bushaltestellen (Linien 12, 25, 45, 46) direkt vor dem Haus
 - **Modernes Design:** Hochwertige Materialien und eine durchdachte Raumaufteilung für eine angenehme Arbeitsatmosphäre
-- **Flexibilität:** Räume können individuell genutzt und gestaltet werden
+- **Flexibilität:** Räume können individuell genutzt werden
 - **Barrierefrei:** Ein Aufzug ist vorhanden
 
 ### Verfügbarkeit
 
-Die Ordinationsflächen werden derzeit komplett saniert und neu eingerichtet und sind ab **Sommer 2025 bezugsfertig**.
+Die Ordinationsflächen sind ab sofort verfügbar.
 
 **Sichern Sie sich jetzt Ihre neue Praxis und gestalten Sie Ihre Räume nach Ihren Vorstellungen!**
 
@@ -78,3 +75,5 @@ Die Ordinationsflächen werden derzeit komplett saniert und neu eingerichtet und
   text="Lage & Kontakt"
   href="/kontakt"
 ></LinkButton>
+
+<Contact></Contact>

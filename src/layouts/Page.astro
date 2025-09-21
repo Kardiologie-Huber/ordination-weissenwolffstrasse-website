@@ -3,18 +3,38 @@ import Head from '../components/page/Head.astro';
 import Navbar from '../components/page/Navbar.astro';
 import Footer from '../components/page/Footer.astro';
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js?url';
+import { getImage } from 'astro:assets';
 import '../styles/styles.scss';
 import { EMAIL } from '../constants';
 
-const { title, description, heroimage, herotitle, herodescription } =
-  Astro.props;
+const {
+  title,
+  description,
+  heroimage,
+  heroimagedarkness,
+  heroimageposition,
+  herotitle,
+  herodescription,
+} = Astro.props;
 
+let heroStyle = '';
+if (heroimage) {
+  const optimizedBackground = await getImage({
+    src: heroimage,
+    format: 'webp',
+    width: 1920,
+    height: 500,
+  });
+  heroStyle = `background-image: url(${optimizedBackground.src}); background-position: ${heroimageposition ?? 'center top'};'`;
+}
 ---
 
 <html lang="de">
   <head>
     <Head
-      title={title ? title + ' | Ordination Weißenwolffstrasse' : 'Ordination Weißenwolffstrasse Linz'}
+      title={title
+        ? title + ' | Ordination Weißenwolffstrasse'
+        : 'Ordination Weißenwolffstrasse Linz'}
       description={description}
     />
   </head>
@@ -29,10 +49,14 @@ const { title, description, heroimage, herotitle, herodescription } =
         heroimage && (
           <div
             class={herotitle ? 'hero-image hero-image-large' : 'hero-image'}
-            style={'background-image: url("/images/' + heroimage + '");background-position: center center;'}
+            style={heroStyle}
           >
+            <div
+              class="hero-image-overlay"
+              style={'opacity: ' + (heroimagedarkness ?? 0)}
+            />
             {herotitle && (
-              <div class="container hero-container">
+              <div class="container-fluid hero-container">
                 <div class="row">
                   <div class="offset-0 col-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
                     <div class="hero-title">
@@ -41,17 +65,8 @@ const { title, description, heroimage, herotitle, herodescription } =
 
                     {herodescription && (
                       <div class="hero-description">
-                        <p>{herodescription}</p>
+                        <p set:html={herodescription} />
                       </div>
-
-                      <p class="text-center actions">
-                        <a class="btn btn-secondary"
-                            aria-current="page"
-                            role="button"
-                            href="/kontakt"
-                            
-                            >Kontakt</a>
-                      </p>
                     )}
                   </div>
                 </div>
@@ -77,8 +92,9 @@ const { title, description, heroimage, herotitle, herodescription } =
     <script src="/js/fslightbox.js" is:inline="true"></script>
 
     <!-- 100% privacy-first analytics -->
-    <script data-collect-dnt="true" async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-  </body>
-  <script src={bootstrap}></script>
-
+    <script
+      data-collect-dnt="true"
+      async
+      src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  </body><script src={bootstrap}></script>
 </html>
