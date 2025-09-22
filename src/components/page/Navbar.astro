@@ -1,16 +1,13 @@
 ---
 import { EMAIL } from '../../constants';
+import { Image } from 'astro:assets';
+import logo from '../../assets/images/logo.jpeg';
 ---
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light">
   <div class="container">
     <a class="navbar-brand text-primary" href="/">
-      <img
-        class="logo"
-        src="/logo.png"
-        width="200"
-        alt="Ordination Weißenwolffstrasse"
-      />
+      <Image src={logo} width="200" alt="Logo Ordination Weißenwolffstrasse" />
     </a>
 
     <button

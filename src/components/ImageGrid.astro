@@ -1,5 +1,5 @@
 ---
-const { name, images, width } = Astro.props;
+const { name, images, height } = Astro.props;
 import { Image } from 'astro:assets';
 import { getImage } from 'astro:assets';
 
@@ -9,21 +9,26 @@ for (const image of images) {
   const optimizedImage = await getImage({
     src: image.src,
     format: 'webp',
-    width: width,
-    height: 500,
+    width: height * (image.aspectRatio ?? 1),
+    height: height,
   });
 
   optimizedImages.push({ ...image, img: optimizedImage });
 }
 
-console.log(optimizedImages);
+console.log(JSON.stringify(optimizedImages[0].img.options));
 ---
 
 <div class="image-grid">
   {
-    images.map((image) => (
+    optimizedImages.map((image) => (
       <a data-fslightbox={name} href={image.src}>
-        <Image src={image.src} alt={image.alt} width={width} height={300} />
+        <Image
+          src={image.src}
+          alt={image.alt}
+          width={image.img.options.width}
+          height={image.img.options.height}
+        />
       </a>
     ))
   }
