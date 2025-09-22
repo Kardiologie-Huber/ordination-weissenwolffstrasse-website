@@ -15,16 +15,14 @@ for (const image of images) {
 
   optimizedImages.push({ ...image, img: optimizedImage });
 }
-
-console.log(JSON.stringify(optimizedImages[0]));
 ---
 
 <div class="image-grid">
   {
     optimizedImages.map((image) => (
-      <a data-fslightbox={name} href={image.imgsrc}>
+      <a data-fslightbox={name} href={image.src}>
         <Image
-          src={image.img.options}
+          src={image.src}
           alt={image.alt}
           width={image.img.options.width}
           height={image.img.options.height}
