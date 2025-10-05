@@ -1,0 +1,30 @@
+---
+const { src, width, displayWidth, alt, name, aspectRatio } = Astro.props;
+import { Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
+
+const optimizedImage: any = await getImage({
+  src: src,
+  format: 'webp',
+  width: displayWidth,
+  height: displayWidth / aspectRatio,
+});
+
+const fullSizeImage: any = await getImage({
+  src: src,
+  format: 'webp',
+  width: width,
+  height: width / aspectRatio,
+});
+---
+
+<a data-fslightbox name={name} href={fullSizeImage.src}>
+  <Image
+    src={optimizedImage.src}
+    alt={alt}
+    class="full-width"
+    width={optimizedImage.options.width}
+    height={optimizedImage.options.height}
+    inferSize={true}
+  />
+</a>

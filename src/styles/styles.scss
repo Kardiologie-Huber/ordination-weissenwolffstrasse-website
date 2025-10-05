@@ -358,3 +358,8 @@ main
   flex-wrap: wrap;
   gap: 10px;
 }
+
+.full-width {
+  max-width: 100%;
+  height: auto;
+}

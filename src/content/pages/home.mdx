@@ -11,6 +11,7 @@ herodescription: Moderne, flexible und zentral gelegene Praxisräume – ideal f
 import { EMAIL, PHONE, WEB } from '../../constants';
 import Contact from '@components/Contact.astro';
 import LinkButton from '@components/LinkButton.astro';
+import LightboxImage from '@components/LightboxImage.astro';
 
 ## Moderne Ordinationsräume zur Miete
 
@@ -44,9 +45,14 @@ Folgende Untersuchungsmöglichkeiten stehen optional zur Verfügung:
 
 **Die Abrechnung für die Nutzung dieser Untersuchungsmöglichkeiten erfolgt nach Vereinbarung.**
 
-<a data-fslightbox href="/images/grundriss.png">
-  <img src="/images/grundriss.png" alt="Grundriss der Ordination" />
-</a>
+<LightboxImage
+  alt="Grundriss"
+  name="Grundriss"
+  src={import('/src/assets/images/grundriss.jpg')}
+  width="2493"
+  displayWidth="1300"
+  aspectRatio={2493 / 1068}
+/>
 
 ### Gemeinschaftsbereiche – Mehr Komfort für Mieter
 
@@ -67,8 +73,6 @@ Zusätzlich profitieren Sie von:
 ### Verfügbarkeit
 
 Die Ordinationsflächen sind ab sofort verfügbar.
-
-**Sichern Sie sich jetzt Ihre neue Praxis und gestalten Sie Ihre Räume nach Ihren Vorstellungen!**
 
 <LinkButton
   style="margin-top: 20px"
