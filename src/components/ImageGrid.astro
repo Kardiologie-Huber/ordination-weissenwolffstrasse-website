@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import { getImage } from 'astro:assets';
 
 const optimizedImages = [];
+const fullSizeImageHeight = 1000;
 
 for (const image of images) {
   const optimizedImage = await getImage({
@@ -13,16 +14,27 @@ for (const image of images) {
     height: height,
   });
 
-  optimizedImages.push({ ...image, img: optimizedImage });
+  const fullSizeImage = await getImage({
+    src: image.src,
+    format: 'webp',
+    width: fullSizeImageHeight * (image.aspectRatio ?? 1),
+    height: fullSizeImageHeight,
+  });
+
+  optimizedImages.push({
+    ...image,
+    img: optimizedImage,
+    fullSizeImg: fullSizeImage,
+  });
 }
 ---
 
 <div class="image-grid">
   {
     optimizedImages.map((image) => (
-      <a data-fslightbox={name} href={image.src}>
+      <a data-fslightbox={name} href={image.fullSizeImg.src}>
         <Image
-          src={image.src}
+          src={image.img.src}
           alt={image.alt}
           width={image.img.options.width}
           height={image.img.options.height}
