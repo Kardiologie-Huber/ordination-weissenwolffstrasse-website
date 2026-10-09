@@ -1,10 +1,25 @@
 ---
 import Page from '../layouts/Page.astro';
+import RelatedServices from '../components/RelatedServices.astro';
 ---
 
-<Page
-  title="Seite nicht gefunden"
-  description="Diese Seite konnte nicht gefunden werden."
->
-  <h1>Seite wurde nicht gefunden</h1>
+<Page title="Seite nicht gefunden" description="Diese Seite konnte nicht gefunden werden.">
+  <div class="svc-head">
+    <div>
+      <h1 class="svc-h1">Seite nicht gefunden</h1>
+      <p class="svc-lead">
+        Diese Seite gibt es nicht oder nicht mehr. Vielleicht finden Sie hier, was Sie suchen.
+      </p>
+    </div>
+  </div>
+
+  <RelatedServices
+    title="Weiter zu"
+    items={[
+      { title: 'Startseite', href: '/', text: 'Ordination mieten in Linz' },
+      { title: 'Ordinationsräume', href: '/ordinationsraeume/', text: 'Fotos und Ausstattung' },
+      { title: 'Timesharing', href: '/ordination-timesharing/', text: 'Halbtags oder tageweise mieten' },
+      { title: 'Kontakt', href: '/kontakt/', text: 'Besichtigung anfragen und Anfahrt' },
+    ]}
+  />
 </Page>

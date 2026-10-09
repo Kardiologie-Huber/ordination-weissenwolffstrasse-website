@@ -1,42 +1,45 @@
 ---
+// "Besichtigung anfragen" vor dem Footer: hellblaues Band wie ScheduleAppointment auf kardiologie-huber.at.
+// Links Überschrift und Text, rechts E-Mail-Button, darunter Telefon und E-Mail.
 const { title, description } = Astro.props;
-import LinkButton from '@components/LinkButton.astro';
 import { PHONE, EMAIL } from '../constants';
+const [emailUser, emailDomain] = EMAIL.split('@');
+const phoneHref = `tel:${PHONE.replace(/\s/g, '')}`;
+const mailHref = `mailto:${EMAIL}?subject=${encodeURIComponent('Besichtigung Ordination Weißenwolffstraße')}`;
 ---
 
-<section class="highlight schedule-appointment">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 offset-0 col-md-8 offset-md-2">
-        <h2 class="text-center">{title ? title : 'Jetzt anfragen'}</h2>
+<section class="schedule-appointment" aria-labelledby="contact-title">
+  <div class="appointment-text">
+    <h2 id="contact-title">{title ? title : 'Besichtigung anfragen'}</h2>
+    <p class="appointment-desc">
+      {
+        description
+          ? description
+          : 'Sie interessieren sich für einen freien Halbtag oder Tag in der Ordination? Wir zeigen Ihnen die Räume gerne persönlich und besprechen, welche Zeiten und Geräte für Sie passen.'
+      }
+    </p>
+  </div>
 
-        <p>
-          {description && <div>{description}</div>}
-          {
-            !description && (
-              <p>
-                Sind Sie interessiert? Wir stehen Ihnen gerne für weitere Informationen oder einen Besichtigungstermin zur Verfügung. Kontaktieren Sie uns einfach per E-Mail unter <a href={'mailto:' + EMAIL}>{EMAIL}</a>{' '}
-                oder telefonisch unter {PHONE}.
-              </p>
-
-              <p class="text-center actions">
-                <a class="btn btn-secondary"
-                    aria-current="page"
-                    role="button"
-                    href={'mailto:' + EMAIL}
-                    target="_blank"
-                    >Kontakt per Email</a>
-              </p>
-            )
-          }
-        </p>
-      </div>
-
-      <!--<div
-        class="d-none d-md-flex col-12 col-md-6 justify-content-center align-items-center"
+  <div class="appointment-actions">
+    <a class="appointment-cta" href={mailHref}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"
+        ><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg
       >
-        <i class="icon fa-sharp-duotone fa-solid fa-calendar-heart"></i>
-      </div> -->
-    </div>
+      Anfrage per E-Mail
+    </a>
+    <p class="appointment-alt">Lieber telefonisch?</p>
+    <a class="appointment-line" href={phoneHref}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"
+        ><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"
+        ></path></svg
+      >
+      <span>{PHONE}</span>
+    </a>
+    <a class="appointment-line" href={`mailto:${EMAIL}`}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"
+        ><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3.5 6.5 8.5 6.5 8.5-6.5"></path></svg
+      >
+      <span>{emailUser}@<wbr />{emailDomain}</span>
+    </a>
   </div>
 </section>

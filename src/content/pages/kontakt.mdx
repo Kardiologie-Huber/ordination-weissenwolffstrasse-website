@@ -1,56 +1,74 @@
 ---
-title: Moderne Ordinationsfläche in Linz
-description: Entdecken Sie Ihre neue Praxis in zentraler Lage in Linz. Perfekt für Ärzte und Therapeuten – modern, flexibel und bestens erreichbar.
+title: Kontakt & Anfahrt – Ordination Weißenwolffstraße Linz
+description: 'Ordination Weißenwolffstraße, Weißenwolffstraße 1, 4020 Linz: Besichtigung der Ordinationsräume anfragen, Telefon, E-Mail, Anfahrt mit Auto und Bus.'
 slug: kontakt
-herotitle: Kontakt
-herodescription: Ordination Weißenwolffstraße, Facharzt für Kardiologie<br/>Weißenwolffstraße 1<br/>4020 Linz
+herotitle: Kontakt & Anfahrt
+herosubtitle: Ordinationsräume zur Untermiete in Linz
+herodescription: Ordination Weißenwolffstraße<br/>Weißenwolffstraße 1, 1. Stock<br/>4020 Linz
 heroimage: 'src/assets/images/kontakt.jpg'
-heroimageposition: 0 50%
+heroimageposition: 50% 40%
+herowash: 1
+herotextside: right
 ---
 
+import Contact from '@components/Contact.astro';
+import Map from '@components/Map.astro';
 import { EMAIL, PHONE, WEB } from '../../constants';
 
-## Lage
+export const phoneHref = `tel:${PHONE.replace(/\s/g, '')}`;
 
-### Adresse
+<div class="contact-rows">
+<section class="topic-row contact-hours">
+
+## Besichtigung
+
+Nach Vereinbarung
+
+<ul class="contact-links">
+  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" /></svg><span>Telefon: <a href={phoneHref}>{PHONE}</a></span></li>
+  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3.5 6.5 8.5 6.5 8.5-6.5" /></svg><span>E-Mail: <a href={`mailto:${EMAIL}`}>{EMAIL}</a></span></li>
+</ul>
+
+</section>
+<section class="topic-row contact-address">
+
+## Adresse
 
 **Weißenwolffstraße 1, 1. Stock  
 4020 Linz  
-Oberösterreich**  
-{''}<a href="https://maps.app.goo.gl/USqswJky77wg3Hms7">Google Maps</a>
+Oberösterreich**
 
-### Kontakt
+<p><a href="https://maps.app.goo.gl/USqswJky77wg3Hms7" target="_blank">Google Maps</a><br/><a href="https://www.openstreetmap.org/#map=18/48.302882/14.299991" target="_blank">In OpenStreetMap anzeigen</a></p>
 
-Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>  
-Telefon: <a href={`tel:${PHONE}`}>{PHONE}</a>  
+E-Mail: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>  
+Telefon: <a href={phoneHref}>{PHONE}</a>  
 Webseite: <a href={`${WEB}`}>{WEB}</a>
 
-### Anfahrt
+</section>
+<section class="topic-row contact-travel">
+
+## Anfahrt
+
+<div class="contact-mode">
 
 **Mit dem Auto:**
 
-Direkt vor dem Haus in der Huemerstraße stehen Ihnen vier kostenfreie Parkplätze zur Verfügung. Der Eingang befindet sich gleich ums Eck in der Weißenwolffstraße.
+Direkt vor dem Haus in der Huemerstraße stehen vier kostenfreie Parkplätze zur Verfügung. Der Eingang befindet sich gleich ums Eck in der Weißenwolffstraße. Bitte beachten Sie, dass in der Umgebung gebührenpflichtige Kurzparkzonen gelten.
 
-Bitte beachten Sie, dass in der Umgebung gebührenpflichtige Kurzparkzonen gelten.
+</div>
+<div class="contact-mode">
 
 **Mit öffentlichen Verkehrsmitteln:**
 
-Vom Hauptbahnhof Linz erreichen Sie uns bequem mit den Buslinien 12, 25, 45 und 46 der LINZ AG. Steigen Sie an der Haltestelle Gruberstraße aus – der Eingang befindet sich direkt hinter der Busstation.
+Vom Hauptbahnhof Linz erreichen Sie die Ordination bequem mit den Buslinien 12, 25, 45 und 46 der LINZ AG. Steigen Sie an der Haltestelle Gruberstraße aus. Der Eingang befindet sich direkt hinter der Busstation.
 
-<div class="location">
-  <div>
-    Weißenwolffstraße 1<br />
-    4020 Linz
-    <br />
-    <a href="https://maps.app.goo.gl/USqswJky77wg3Hms7">
-      In Google Maps anzeigen
-    </a>
-    <a href="https://www.openstreetmap.org/#map=18/48.302882/14.299991">
-      In OpenStreetMap anzeigen
-    </a>
-    <br />
-    <a href="http://openstreetmap.org/copyright" target="_blank">
-      &copy; OpenStreetMap
-    </a>
-  </div>
 </div>
+
+Die Ordination liegt im 1. Stock und ist mit dem Aufzug barrierefrei erreichbar.
+
+</section>
+</div>
+
+<Contact />
+
+<Map />

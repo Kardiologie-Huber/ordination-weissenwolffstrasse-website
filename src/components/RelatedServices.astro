@@ -1,0 +1,45 @@
+---
+// Block "Weitere Untersuchungen" am Ende einer Leistungsseite:
+// vier Spalten nebeneinander (auf schmalen Bildschirmen zwei), Name mit Pfeil
+// über einem Kurztext.
+//
+// Verwendung in MDX:
+//   <RelatedServices items={[
+//     { title: 'Herzultraschall', href: '/leistungen/echokardiographie/',
+//       text: 'Pumpkraft, Herzklappen und Herzmuskel' },
+//   ]} />
+interface Item {
+  title: string;
+  href: string;
+  text?: string;
+}
+const { title = 'Weitere Untersuchungen', items = [] } = Astro.props as {
+  title?: string;
+  items: Item[];
+};
+---
+
+<nav class="related" aria-labelledby="related-heading">
+  <h2 id="related-heading">{title}</h2>
+  <ul>
+    {
+      items.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            target={item.href.startsWith('http') ? '_blank' : undefined}
+            rel={item.href.startsWith('http') ? 'noopener' : undefined}
+          >
+            <span class="related-name">
+              {item.title}
+              <svg class="related-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg>
+            </span>
+            {item.text && <span class="related-text">{item.text}</span>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

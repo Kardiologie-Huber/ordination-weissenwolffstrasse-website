@@ -1,13 +1,18 @@
 ---
-import { EMAIL } from '../../constants';
+import { PHONE, PRACTICES } from '../../constants';
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/logo.jpeg';
+
+const pathname = Astro.url.pathname;
+const phoneHref = `tel:${PHONE.replace(/\s/g, '')}`;
+const inPractices = pathname.startsWith('/aerzte-und-therapeuten/');
+const current = (href: string) => (pathname === href ? 'page' : undefined);
 ---
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light">
   <div class="container">
     <a class="navbar-brand text-primary" href="/">
-      <Image src={logo} width="200" alt="Logo Ordination Weißenwolffstrasse" />
+      <Image src={logo} width="200" alt="Ordination Weißenwolffstraße Linz" />
     </a>
 
     <button
@@ -17,60 +22,83 @@ import logo from '../../assets/images/logo.jpeg';
       data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
-      aria-label="Toggle navigation"
+      aria-label="Menü öffnen"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-15">
-        <!-- <li class="nav-item dropdown">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="/ordinationsraeume/" aria-current={current('/ordinationsraeume/')}
+            >Ordinationsräume</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            href="/ordination-timesharing/"
+            aria-current={current('/ordination-timesharing/')}>Timesharing</a
+          >
+        </li>
+        <li class="nav-item dropdown">
           <a
             class="nav-link active dropdown-toggle"
-            href="#"
-            id="navbarDropdown"
+            href="/aerzte-und-therapeuten/"
+            id="practicesDropdown"
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            aria-current={inPractices || pathname === '/aerzte-und-therapeuten/' ? 'page' : undefined}
           >
-            Unsere Experten
+            Ärzte & Therapeuten
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu" aria-labelledby="practicesDropdown">
             <li>
-              <a
-                class="dropdown-item"
-                href="/experten/kardiologe-dr-peter-huber/"
-                >Dr. Huber Peter, Facharzt für Kardiologie</a
+              <a class="dropdown-item" href="/aerzte-und-therapeuten/" aria-current={current('/aerzte-und-therapeuten/')}
+                >Alle Praxen im Überblick</a
               >
             </li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="/experten/neurologin-dr-violetta-kure/"
-                >Dr. Kure Violetta, Fachärztin für Neurologie</a
-              >
-            </li>
+            <li><hr class="dropdown-divider" /></li>
+            {
+              PRACTICES.map((p) => (
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href={p.href}
+                    aria-current={current(p.href)}
+                    target={p.href.startsWith('http') ? '_blank' : undefined}
+                  >
+                    {p.name}
+                    <small>{p.field}</small>
+                  </a>
+                </li>
+              ))
+            }
           </ul>
-        </li> -->
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/kontakt/" aria-current={current('/kontakt/')}>Kontakt</a>
+        </li>
 
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            href="/ordinationsraeume/">Ordinationsräume</a
+        <li class="nav-item nav-phone">
+          <a class="nav-link" href={phoneHref}
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              ><path
+                d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"
+              ></path></svg
+            >{PHONE}</a
           >
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            href="/ordination-timesharing/">Timesharing</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="btn btn-primary ms-4" aria-current="page" href="/kontakt"
-            >Lage & Kontakt</a
-          >
+        <li class="nav-item book-appointment">
+          <a class="btn btn-secondary" href="/kontakt/">Besichtigung anfragen</a>
         </li>
       </ul>
     </div>

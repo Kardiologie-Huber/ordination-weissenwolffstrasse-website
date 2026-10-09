@@ -1,0 +1,25 @@
+---
+// Praxen, die bereits in der Ordination arbeiten (Startseite, Überblick): Register mit Name und Fach.
+import { PRACTICES } from '../constants';
+---
+
+<ul class="practices">
+  {
+    PRACTICES.map((p) => {
+      const external = p.href.startsWith('http');
+      return (
+        <li>
+          <a href={p.href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined}>
+            <span class="practice-name">
+              {p.name}
+              <svg class="practice-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h13M13 6l6 6-6 6" />
+              </svg>
+            </span>
+            <span class="practice-text">{p.text}</span>
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

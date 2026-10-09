@@ -1,35 +1,45 @@
 ---
-import { EMAIL, PHONE } from '../../constants';
+import { EMAIL, PHONE, PRACTICES } from '../../constants';
+const phoneHref = `tel:${PHONE.replace(/\s/g, '')}`;
 ---
 
-<div class="container-fluid">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-6 text-center text-md-start mt-4 mt-md-0">
-        <p>
-          Ordination Weißenwolffstrasse
-          <br />
-          <a href="https://kardiologie-huber.at/" target="_blank"
-            >Dr. med. Peter Huber</a
-          >
-          <br />
-          Weißenwolffstraße 1, 1. Stock
-          <br />
-          4020 Linz
-          <br />
-          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          <br />
-          <a href={`tel:${PHONE}`}>{PHONE}</a>
-          <br /><br />
-          &copy; {new Date().getFullYear()} Dr. med. Peter Huber
-        </p>
-      </div>
-      <div class="col-12 col-md-6 text-center text-md-start">
-        <a href="/">Home</a><br />
-        <a href="/ordination-timesharing/">Timesharing</a><br />
-        <a href="/kontakt/">Lage & Kontakt</a><br />
-        <a href="/impressum/">Impressum</a>
-      </div>
+<div class="container">
+  <div class="footer-grid">
+    <a class="footer-logo" href="/"
+      ><img src="/images/logo-ordination-white.png" width="250" height="60" alt="Ordination Weißenwolffstraße" /></a
+    >
+    <address class="footer-address">
+      <strong>Ordination Weißenwolffstraße</strong>
+      Weißenwolffstraße 1, 1. Stock<br />
+      4020 Linz<br />
+      Ordinationsräume zur Untermiete
+    </address>
+    <div class="footer-contact">
+      <a href={phoneHref}>{PHONE}</a>
+      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <p>Besichtigung nach Vereinbarung</p>
     </div>
+    <nav class="footer-nav" aria-label="Fußzeile">
+      <ul>
+        <li><a href="/ordinationsraeume/">Ordinationsräume</a></li>
+        <li><a href="/ordination-timesharing/">Timesharing</a></li>
+        <li><a href="/kontakt/">Lage & Kontakt</a></li>
+      </ul>
+      <ul>
+        {
+          PRACTICES.map((p) => (
+            <li>
+              <a href={p.href} target={p.href.startsWith('http') ? '_blank' : undefined}>
+                {p.name}: {p.field}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-meta">
+    <span>&copy; {new Date().getFullYear()} Dr. med. Peter Huber</span>
+    <a href="/impressum/">Impressum</a>
   </div>
 </div>

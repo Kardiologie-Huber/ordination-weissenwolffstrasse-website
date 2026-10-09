@@ -22,11 +22,38 @@
         "heroimageposition": {
           "type": "string"
         },
+        "herowash": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "herotextside": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right"
+          ]
+        },
         "herotitle": {
+          "type": "string"
+        },
+        "herosubtitle": {
           "type": "string"
         },
         "herodescription": {
           "type": "string"
+        },
+        "tenant": {
+          "type": "object",
+          "properties": {
+            "photo": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "photo"
+          ],
+          "additionalProperties": false
         },
         "$schema": {
           "type": "string"

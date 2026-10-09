@@ -1,10 +1,114 @@
 ---
-const { title, description } = Astro.props;
+import { getImage } from 'astro:assets';
+import ogSource from '../../assets/images/empfang-4.jpg';
+import { EMAIL, PHONE, PRACTICES, SITE_NAME, WEB } from '../../constants';
 
-let canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
-if (!canonicalURL.endsWith('/') && !canonicalURL.includes('?')) {
-  canonicalURL += '/';
+const { title, description, pageTitle, faq = [] } = Astro.props;
+
+const SITE = WEB;
+const pathname = Astro.url.pathname;
+const canonicalURL = new URL(pathname, SITE).toString();
+
+const og = await getImage({ src: ogSource, format: 'jpg', width: 1200, height: 630 });
+const ogImage = new URL(og.src, SITE).toString();
+
+// ---------- schema.org: Ordination mit den Praxen, die hier ordinieren ----------
+const clinicId = `${SITE}/#ordination`;
+const practiceSchema = (p: (typeof PRACTICES)[number]) => ({
+  '@type': p.type,
+  name: p.name,
+  description: p.text,
+  url: p.website,
+  ...(p.specialty && { medicalSpecialty: p.specialty }),
+});
+
+const clinic = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalClinic',
+  '@id': clinicId,
+  name: SITE_NAME,
+  url: `${SITE}/`,
+  description:
+    'Ordinationsräume in Linz zur Untermiete: voll ausgestattete Praxisräume für Ärztinnen, Ärzte und Therapeutinnen, halbtags, tageweise oder im Timesharing.',
+  telephone: PHONE,
+  email: EMAIL,
+  image: ogImage,
+  logo: `${SITE}/logo.png`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Weißenwolffstraße 1, 1. Stock',
+    postalCode: '4020',
+    addressLocality: 'Linz',
+    addressRegion: 'Oberösterreich',
+    addressCountry: 'AT',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 48.302882,
+    longitude: 14.299991,
+  },
+  hasMap: 'https://maps.app.goo.gl/USqswJky77wg3Hms7',
+  amenityFeature: [
+    'Barrierefrei mit Aufzug',
+    'Kostenfreie Parkplätze vor dem Haus',
+    'Klimaanlage',
+    'Zugang zum GINS (e-card)',
+    'Empfang mit zwei Arbeitsplätzen',
+    'Wartebereich',
+  ].map((name) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
+  department: PRACTICES.map(practiceSchema),
+};
+
+// ---------- schema.org: eigene Seite einer Praxis ----------
+const practice = PRACTICES.find((p) => p.href === pathname);
+const practicePage = practice
+  ? {
+      '@context': 'https://schema.org',
+      ...practiceSchema(practice),
+      '@id': `${canonicalURL}#praxis`,
+      sameAs: [practice.website],
+      mainEntityOfPage: canonicalURL,
+      address: clinic.address,
+      location: { '@id': clinicId },
+    }
+  : null;
+
+// ---------- schema.org: Breadcrumbs (nicht auf der Startseite) ----------
+const segments = pathname.split('/').filter(Boolean);
+const isNotFound = segments[0] === '404';
+let breadcrumb: Record<string, unknown> | null = null;
+if (segments.length > 0 && !isNotFound) {
+  const items = [{ name: 'Startseite', url: `${SITE}/` }];
+  if (segments[0] === 'aerzte-und-therapeuten' && segments.length > 1) {
+    items.push({ name: 'Ärzte & Therapeuten', url: `${SITE}/aerzte-und-therapeuten/` });
+  }
+  const name = practice?.name ?? (segments[0] === 'aerzte-und-therapeuten' ? 'Ärzte & Therapeuten' : pageTitle ?? title);
+  items.push({ name, url: canonicalURL });
+  breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
 }
+
+// ---------- schema.org: FAQ ----------
+const faqSchema =
+  faq.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map((f: { question: string; answer: string }) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        })),
+      }
+    : null;
 ---
 
 <meta charset="utf-8" />
@@ -15,8 +119,49 @@ if (!canonicalURL.endsWith('/') && !canonicalURL.includes('?')) {
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
 
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Canonical URL -->
+{isNotFound ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonicalURL} />}
+
+<!-- Title and description -->
 <title>{title}</title>
-<meta name="title" content={title} />
 <meta name="description" content={description} />
-<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="de_AT" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:alt" content="Empfangsbereich der Ordination Weißenwolffstraße in Linz" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- schema.org -->
+<script type="application/ld+json" is:inline set:html={JSON.stringify(clinic)} />
+{
+  practicePage && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(practicePage)} />
+  )
+}
+{
+  breadcrumb && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(breadcrumb)} />
+  )
+}
+{
+  faqSchema && (
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
+  )
+}

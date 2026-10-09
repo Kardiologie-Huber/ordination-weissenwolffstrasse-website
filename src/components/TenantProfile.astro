@@ -1,0 +1,53 @@
+---
+// Kopf einer Praxisseite (/aerzte-und-therapeuten/…): dunkelblauer Kopf mit Brotkrumen,
+// Name als H1, Fach, Einleitung und Link zur Website; rechts das Porträt, falls vorhanden.
+//
+// Name, Fach und Website kommen aus PRACTICES (src/constants.ts), das Porträt aus dem
+// Frontmatter-Feld `tenant` der Seite. Verwendung in MDX:
+//   <TenantProfile lead="Kurze Einleitung …" />
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { PRACTICES } from '../constants';
+
+const { lead } = Astro.props as { lead?: string };
+
+const pathname = Astro.url.pathname;
+const practice = PRACTICES.find((p) => p.href === pathname);
+if (!practice) throw new Error(`TenantProfile: keine Praxis für ${pathname} in PRACTICES`);
+
+const slug = pathname.replace(/^\/|\/$/g, '');
+const entry = (await getCollection('pages')).find((p) => p.slug === slug);
+const tenant = entry?.data.tenant;
+const host = new URL(practice.website).host.replace(/^www\./, '');
+---
+
+<div class="svc-head tenant-head">
+  <div>
+    <ol class="crumbs">
+      <li><a href="/">Startseite</a></li>
+      <li><a href="/aerzte-und-therapeuten/">Ärzte & Therapeuten</a></li>
+      <li aria-current="page">{practice.name}</li>
+    </ol>
+    <h1 class="svc-h1">{practice.name}</h1>
+    <p class="tenant-field">{practice.text}</p>
+    {lead && <p class="svc-lead">{lead}</p>}
+    <a class="tenant-cta" href={practice.website} target="_blank" rel="noopener">
+      Zur Website {host}
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"></path></svg>
+      <span class="visually-hidden"> (öffnet ein neues Fenster)</span>
+    </a>
+  </div>
+
+  {
+    tenant?.photo && (
+      <figure class="tenant-photo">
+        <Image
+          src={tenant.photo}
+          width={600}
+          loading="eager"
+          alt={`${practice.name}, ${practice.field} in Linz`}
+        />
+      </figure>
+    )
+  }
+</div>

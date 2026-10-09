@@ -1,52 +1,89 @@
 ---
-title: Ordinationsflächen Linz
-description: Sie suchen als Arzt, Therapeut oder Gesundheitsdienstleister eine moderne, flexible Ordinationsfläche? Wir bieten optimal ausgestattete Räume in Linz!
+title: Ordination mieten in Linz – Praxisräume im Timesharing
+description: Ordinationsräume in Linz zur Untermiete, halbtags oder tageweise im Timesharing. Voll ausgestattet mit Empfang, Wartebereich und e-card. Barrierefrei.
 slug: '/'
 heroimage: 'src/assets/images/empfang-4.jpg'
-heroimageposition: 50% 20%
-herotitle: Ihre neue Ordinationsfläche in Linz
-herodescription: Moderne, flexible und zentral gelegene Praxisräume – ideal für Ärzte, Therapeuten und Gesundheitsdienstleister.
+heroimageposition: 50% 30%
+herowash: 0.8
+herotitle: Ordination mieten in Linz
+herosubtitle: Voll ausgestattete Praxisräume im Timesharing, halbtags oder tageweise
+herodescription: 'Weißenwolffstraße 1, 1. Stock, im Zentrum von Linz. Derzeit sind einzelne Halbtage und Tage frei.'
 ---
 
-import { EMAIL, PHONE, WEB } from '../../constants';
 import Contact from '@components/Contact.astro';
-import LinkButton from '@components/LinkButton.astro';
+import Header from '@components/Header.astro';
+import Practices from '@components/Practices.astro';
 import LightboxImage from '@components/LightboxImage.astro';
 
-## Moderne Ordinationsräume zur Miete
+<section class="intro">
+<div class="intro-text">
 
-Sichern Sie sich Ihre neue Praxisfläche in zentraler Lage von Linz! In der Weißenwolffstraße 1 (1. Stock), 4020 Linz bieten wir drei komplett renovierte und hochwertig ausgestattete Ordinationsräume zur Miete an – ideal für Ärzte, Therapeuten und andere Gesundheitsdienstleister.
+## Praxisräume zur Untermiete im Zentrum von Linz
 
-Die Räumlichkeiten sind flexibel mietbar: von einer halbtägigen Nutzung an bestimmten Wochentagen bis hin zur dauerhaften Anmietung.
+In der Weißenwolffstraße 1 in Linz vermieten wir komplett renovierte und hochwertig ausgestattete Ordinationsräume an Ärztinnen und Ärzte, Therapeutinnen und Therapeuten sowie andere Gesundheitsberufe.
 
-### Voll ausgestattet Ordinationsräume
+Die Räume werden im **Timesharing** genutzt: Sie mieten einzelne Halbtage oder ganze Tage pro Woche und teilen sich Empfang, Wartebereich und Personalräume mit den Praxen, die bereits hier ordinieren. So starten Sie ohne eigene Investition in Räume und Einrichtung, etwa mit einer Wahlarztordination oder einer zweiten Ordination in Linz. Wie das Modell funktioniert, lesen Sie auf der Seite [Timesharing](/ordination-timesharing/).
+
+</div>
+<div class="intro-list">
+
+**Das bieten wir Ihnen:**
+
+- **Sofort arbeitsfähig.** Untersuchungsliege, Arbeitsplatz, Internet, Waschbecken und Klimaanlage in jedem Raum.
+- **e-card und GINS.** Zugang zum Gesundheitsinformationsnetz in allen Ordinationsräumen.
+- **Geräte zur Mitbenutzung.** Ultraschall, Ergometrie, EKG und mehr nach Vereinbarung.
+- **Gemeinsame Infrastruktur.** Empfang, klimatisierter Wartebereich und Personalraum mit Küche.
+- **Zentral und barrierefrei.** Aufzug, Parkplätze vor dem Haus, Bushaltestelle direkt nebenan.
+- **Eigene Seite für Ihre Praxis.** Mit Beschreibung, Foto und Link zu Ihrer Website unter [Ärzte & Therapeuten](/aerzte-und-therapeuten/).
+
+</div>
+</section>
+
+<Header title="Bereits in der Ordination" subtitle="Diese Praxen arbeiten schon in der Weißenwolffstraße 1." />
+
+<Practices />
+
+<div class="topic-rows">
+<section class="topic-row">
+
+## Ausstattung der Ordinationsräume
+
+Jeder Raum ist voll ausgestattet. Fotos aller Räume finden Sie unter [Ordinationsräume](/ordinationsraeume/).
 
 - Untersuchungsliege
-- Arbeitsplatz
-- Steharbeitsplatz
+- Arbeitsplatz und Steharbeitsplatz
 - Internetanschluss
 - Waschbecken
-- Blutdruckmessgerät
-- Waage
-- Zugang zum GINS (Gesundheitsinformationsnetzservice, Ecard)
+- Blutdruckmessgerät und Waage
+- Zugang zum GINS (Gesundheitsinformationsnetz, e-card)
 - Klimaanlage
 
-### Zusätzliche Untersuchungsmöglichkeiten
+</section>
+<section class="topic-row">
 
-Folgende Untersuchungsmöglichkeiten stehen optional zur Verfügung:
+## Zusätzliche Untersuchungsmöglichkeiten
+
+Folgende Geräte können Sie nach Vereinbarung mitbenutzen:
 
 - Ergometrie
 - Spirometrie
 - Polygraphie
-- EKG
-- Langzeit EKG
-- Langzeit Blutdruck
-- Ultraschall (drei Schallköpfe für Abdomensonographie, Echokardiographie, Gefäßduplex, Small Parts)
+- EKG, Langzeit-EKG und Langzeit-Blutdruckmessung
+- Ultraschall mit drei Schallköpfen für Abdomensonographie, Echokardiographie, Gefäßduplex und Small Parts
 
-**Die Abrechnung für die Nutzung dieser Untersuchungsmöglichkeiten erfolgt nach Vereinbarung.**
+Die Abrechnung für die Nutzung der Geräte erfolgt nach Vereinbarung.
+
+</section>
+<section class="topic-row">
+
+## Gemeinschaftsbereiche
+
+- Einladender **Empfangsbereich** mit Arbeitsplätzen für zwei Ordinationsassistenzen
+- Heller, klimatisierter **Wartebereich**
+- **Gemeinsame Personalräume** mit Küche und sanitären Anlagen
 
 <LightboxImage
-  alt="Grundriss"
+  alt="Grundriss der Ordination Weißenwolffstraße mit Ordinationsräumen, Empfang und Wartebereich"
   name="Grundriss"
   src={import('/src/assets/images/grundriss.jpg')}
   width="2493"
@@ -54,30 +91,24 @@ Folgende Untersuchungsmöglichkeiten stehen optional zur Verfügung:
   aspectRatio={2493 / 1068}
 />
 
-### Gemeinschaftsbereiche – Mehr Komfort für Mieter
+</section>
+</div>
 
-Zusätzlich profitieren Sie von:
+<div class="topic-pair">
+<div>
 
-- einem einladender **Empfangsbereich** mit Arbeitsplatz für zwei Ordinationsassistenzen,
-- einem hellen, klimatisierten **Wartebereich**,
-- **gemeinsamen Personalräumen** mit Küche und sanitären Anlagen.
+## Timesharing statt eigener Praxis
 
-### Warum diese Ordinationsflächen?
+Sie zahlen nur für die Zeiten, in denen Sie die Ordination tatsächlich nutzen. Einrichtung, Empfang und Wartebereich sind bereits vorhanden, Betrieb und Instandhaltung teilen sich alle Praxen. Derzeit sind einzelne Halbtage und Tage frei. Welche Zeiten passen, besprechen wir gerne bei einer Besichtigung. Mehr dazu auf der Seite [Timesharing](/ordination-timesharing/).
 
-- **Top-Online-Präsenz:** Ihre Praxis wird auf <a href={`${WEB}`}>{WEB}</a> gelistet
-- **Zentrale Lage:** Beste Erreichbarkeit im Herzen von Linz – Parkplätze für Patienten & Bushaltestellen (Linien 12, 25, 45, 46) direkt vor dem Haus
-- **Modernes Design:** Hochwertige Materialien und eine durchdachte Raumaufteilung für eine angenehme Arbeitsatmosphäre
-- **Flexibilität:** Räume können individuell genutzt werden
-- **Barrierefrei:** Ein Aufzug ist vorhanden
+</div>
+<div>
 
-### Verfügbarkeit
+## Zentrale Lage in Linz
 
-Die Ordinationsflächen sind ab sofort verfügbar.
+Die Ordination liegt im 1. Stock der Weißenwolffstraße 1, direkt bei der Bushaltestelle Gruberstraße (Linien 12, 25, 45 und 46) und wenige Minuten vom Hauptbahnhof entfernt. Vor dem Haus gibt es kostenfreie Parkplätze für Patientinnen und Patienten, ein Aufzug ist vorhanden. Details zur [Anfahrt finden Sie auf der Kontaktseite](/kontakt/).
 
-<LinkButton
-  style="margin-top: 20px"
-  text="Lage & Kontakt"
-  href="/kontakt"
-></LinkButton>
+</div>
+</div>
 
-<Contact></Contact>
+<Contact />

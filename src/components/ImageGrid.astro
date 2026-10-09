@@ -3,15 +3,19 @@ const { name, images, height } = Astro.props;
 import { Image } from 'astro:assets';
 import { getImage } from 'astro:assets';
 
+// Blocksatz-Galerie: jedes Bild wächst proportional zu seinem Seitenverhältnis (--ar), so füllt jede
+// Zeile die Breite und alle Bilder einer Zeile sind gleich hoch. Vorschaubilder in doppelter Höhe für
+// hochauflösende Bildschirme.
 const optimizedImages = [];
 const fullSizeImageHeight = 1000;
+const thumbHeight = height * 2;
 
 for (const image of images) {
   const optimizedImage = await getImage({
     src: image.src,
     format: 'webp',
-    width: height * (image.aspectRatio ?? 1),
-    height: height,
+    width: Math.round(thumbHeight * (image.aspectRatio ?? 1)),
+    height: thumbHeight,
   });
 
   const fullSizeImage = await getImage({
@@ -32,7 +36,7 @@ for (const image of images) {
 <div class="image-grid">
   {
     optimizedImages.map((image) => (
-      <a data-fslightbox={name} href={image.fullSizeImg.src}>
+      <a data-fslightbox={name} href={image.fullSizeImg.src} style={`--ar: ${image.aspectRatio ?? 1}`}>
         <Image
           src={image.img.src}
           alt={image.alt}
